@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class Persona{
+            constructor(nombre, edad, genero){
+                this.nombre = nombre;
+                this.edad = edad;
+                this.genero = genero;
+            }
+
+            get obtDetalles() {
+                return [nombre, edad, genero];
+            }
+        }
+
+        class Estudiante extends Persona{
+            constructor(nombre, edad, genero, curso, grupo){
+                super(nombre, edad, genero);
+                this.curso = curso;
+                this.grupo = grupo;
+                
+            }
+            set registrar(Array){
+                
+            }
+        }
+
+        class Profesor extends Persona{
+            constructor(nombre, edad, genero, asignatura, nivel){
+                super(nombre, edad, genero);
+                this.asignatura = asignatura ;
+                this.nivel = nivel;
+            }
+            
+
+        }
+
+        let p1 = new Persona("Victor", 21, "H");
+        let e1 = new Estudiante("Andrea",22,"M","TIC", "17");
+        let pr1 = new Profesor("Ricardo",23,"H","Programacion","Preparatoria");
+        document.write(JSON.stringify(p1));
+        document.write(JSON.stringify(e1));
+        document.write(JSON.stringify(pr1));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var cadena = prompt("Introduce la cadena");
+    let array = cadena.split("");
+    var resutaldo = "La cadena es mixta"
+    var contador = 0;
+    array.forEach(element => {
+        element.toUpperCase() === element ? contador++ : contador--;
+    });
+    if(contador === cadena.length){
+        resutaldo = "La palabra esta en mayusculas";
+    }else if(contador == cadena.length*-1){
+        resutaldo = "La palabra esta en minusculas";
+    }
+    alert(resutaldo);
+
+</script>
+
+</html>

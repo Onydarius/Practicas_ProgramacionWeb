@@ -1,0 +1,182 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Ejercicio 21 - Validación de formularios</title>
+
+    <style type="text/css">
+        body {
+            font-family: arial, helvetica;
+        }
+
+        form {
+            width: 600px;
+            margin: 20px auto 0 auto;
+        }
+
+        label {
+            float: left;
+            width: 200px;
+            font-weight: bold;
+        }
+
+        label[for="registro_condiciones"] {
+            float: none;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        textarea {
+            width: 360px;
+        }
+
+        input[type="checkbox"] {
+            margin-left: 200px;
+        }
+
+        input[type="submit"] {
+            margin: 20px 0 0 200px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="servidor.php" method="POST" id="registro" onsubmit="return validate()">
+        <fieldset>
+            <legend>Registro</legend>
+            <label for="registro_nombre">Nombre:</label>
+            <input type="text" name="nombre" id="registro_nombre" onblur="validateName(this)">
+
+            <label for="registro_apellidos">Apellido:</label>
+            <input type="text" name="apellido" id="registro_apellido" onblur="validateLastName(this)">
+
+            <label for="registro_email">Email:</label>
+            <input type="text" name="email" id="registro_email" onblur="validateEmail(this)">
+
+            <label for="registro_password">Password:</label>
+            <input type="password" name="password" id="registro_password" onblur="validatePassword(this)">
+
+            <label for="registro_comentarios">Comentarios:</label>
+            <textarea name="comentarios" id="registro_comentarios" rows="10" onblur="validateComments(this)"></textarea>
+
+            <input type="checkbox" name="condiciones" id="registro_condiciones" value="1">
+            <label for="registro_condiciones">Acepto las condiciones del servicio.</label>
+
+            <input type="submit" value="Enviar">
+        </fieldset>
+    </form>
+</body>
+<script>
+    const email_pattern = /[\w-]+@+[\w]+.+[\w]{2,3}/;
+
+    function searchErrorOnPassword(pas){
+        var error = Array();
+        if (pas.value.length < 6) {
+            error.push("6 digitos.\n");
+        }
+        if (!pas.value.match(/[A-Z]/)) {
+            error.push("una letra en mayuscula.\n")
+        }
+        if (!pas.value.match(/[a-z]/)) {
+            error.push("una letra en minuscula.\n")
+        }
+        if (!pas.value.match(/\d/)) {
+            error.push("un digito.\n")
+        }
+        return error;
+    }
+
+    function validatePassword(pas) {
+        var errors = searchErrorOnPassword(pas);
+        if (errors.length != 0) {
+            var advise = "Tu contraseña debe contener: \n"
+            errors.forEach(element => {
+                advise += "• Al menos " + element;
+            });
+            alert(advise);
+        }
+    }
+
+    function searchErrorOnComments(com){
+        if (com.value.length > 50) {
+            return true;
+        }
+        return false;
+    }
+    function validateComments(com) {
+        if(searchErrorOnComments(com)){
+            alert("El comentario no debe exceder de los 50 caracteres.");
+        }
+    }
+
+    function searchErrorOnEmail(email){
+        var errors = Array();
+        if (!email.value.match(email_pattern)) {
+            errors.push("Se debe ingresar un email valido. \n")
+        }
+        if(email.value == ""){
+            errors.push("El campo no puede estar vacio. \n")
+        };
+        return errors;
+    }
+
+    function validateEmail(email) {
+        var errors = searchErrorOnEmail(email);
+        if (errors.length != 0) {
+            var advise = "Tu email no cumple con los requisitos: \n"
+            errors.forEach(element => {
+                advise += "• " + element;
+            });
+            alert(advise);
+        }
+        
+    }
+
+    function validateName(name){
+        var cad = isNotNull(name);
+        if(cad.length > 0 ){
+            alert(cad);
+        }
+    }
+    function validateLastName(lastName){
+        var cad = isNotNull(lastName);
+        if(cad.length > 0 ){
+            alert(cad);
+        }
+    }
+    function isNotNull(cad) {
+        if (cad.value == "") {
+            return("El " + cad.getAttribute("name") + " no puede estar vacio");
+        }
+    }
+
+    function validate() {
+        var errors = Array();
+        var tempError = isNotNull(document.getElementById("registro_nombre").value);
+        if(tempError.length > 0){
+            errors.push(tempError);
+            alert(errors)
+        }
+        alert(errors);
+
+        /* var tempError = isNotNull(document.getElementById("registro_apellido").value);
+        if(tempError.length > 0 ){
+            errors.push(tempError);
+        }
+
+        var tempError = searchErrorOnEmail(document.getElementById("registro_email").email);
+        if(tempError.length > 0){
+            tempError.forEach(element => {
+                errors.push(element);
+            });
+        }
+
+        var xd = prompt(tempError); */
+        return false;
+    }
+</script>
+
+</html>

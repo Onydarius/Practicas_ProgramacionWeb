@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="" id="from1">
+
+        <input type="submit" value="enviar" id="submit">
+    </form>
+</body>
+<script>
+    window.onload = crearFormulario(["Apellidos", "Nombre", "E-Mail", "Contraseña"]);
+    
+    function crearFormulario(array) {
+        let form = document.getElementById("from1");
+        let last_node = document.getElementById("submit");
+        array.forEach(element => {
+            form.insertBefore(document.createTextNode(element), last_node);
+            var input = document.createElement("input");
+            input.type = "text";
+            input.name = element;
+            form.insertBefore(input,last_node);
+            form.insertBefore(document.createElement("br"),last_node);
+        });
+
+    }
+</script>
+
+</html>

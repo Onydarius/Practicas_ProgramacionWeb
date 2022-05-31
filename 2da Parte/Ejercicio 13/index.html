@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<div>
+    <h1>Validar fechas</h1>
+    <label for="fecha">Fecha:</label>
+    <input type="text" id="fecha" style="min-width: 200px;">
+    <button onclick="validarFecha()">Validar</button>
+    <p" id="fecha_status" />
+</div>
+
+<div>
+    <h1>Validar correo</h1>
+    <label for="correo">Correo:</label>
+    <input type="text" id="correo" style="min-width: 200px;">
+    <button onclick="validarCorreo()">Validar</button>
+    <p" id="correo_status" />
+</div>
+
+<div>
+    <h1>Validar expresion</h1>
+    <label for="expresion">Expresion:</label>
+    <input type="text" id="expresion" style="min-width: 200px;">
+    <button onclick="validarExpresion()">Validar</button>
+    <p" id="expresion_status" />
+</div>
+
+<div>
+    <h1>Invertir nombre</h1>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" style="min-width: 200px;">
+    <button onclick="validarNombre()">Invertir</button>
+    <p" id="nombre_status" />
+</div>
+
+<div>
+    <h1>Validar cadena</h1>
+    <label for="cadena">Cadena:</label><br>
+    <textarea name="" id="cadena" cols="50" rows="10"></textarea><br>
+    <button onclick="validarCadena()">comprobar</button>
+    <p" id="cadena_status" />
+</div>
+
+<body>
+
+</body>
+<script>
+    document.getElementById("fecha").value = "Nací el 05/04/1982 en Donostia.";
+    document.getElementById("correo").value = "Onydariu3sa.-@asd.com";
+    document.getElementById("expresion").value = "/&<>";
+    document.getElementById("nombre").value = "Ricardo Rubio";
+    document.getElementById("cadena").value ="\<script\>console.log(\"Inyectando codigo\")\<\/script\>";
+
+    const fecha_pattern = /\d{2}\/\d{2}\/\d{4}/;
+    const email_pattern = /[\w-]+@+[\w]+.+[\w]{2,3}/;
+
+    var character = {
+            '<': '&lt;',
+            '>': '&gt;',
+            '&': '&amp;',
+            '"': '&quot;'
+        };
+
+    function validarFecha() {
+        const date = document.getElementById("fecha").value;
+        const alert_date = document.getElementById("fecha_status")
+
+        if (date.match(fecha_pattern)) {
+            alert_date.innerHTML = "La cadena contiene una fecha valida";
+            alert_date.style.color = "#008F39";
+        } else {
+            alert_date.innerHTML = "La cadena no contiene una fecha valida.";
+            alert_date.style.color = "#FF0000";
+
+        }
+    }
+
+    function validarCorreo() {
+        const email = document.getElementById("correo").value;
+        const alert_email = document.getElementById("correo_status");
+
+        if (email.match(email_pattern)) {
+            alert_email.innerHTML = "La cadena contiene un email valido";
+            alert_email.style.color = "#008F39";
+        } else {
+            alert_email.innerHTML = "La cadena no contiene un email valido.";
+            alert_email.style.color = "#FF0000";
+
+        }
+    }
+
+    function validarExpresion() {
+        var expresion = document.getElementById("expresion").value;
+        var alert_expresion = document.getElementById("expresion_status")
+        expresion.replace(/[<>&"]/g, function (c) {
+            return character[c];
+        });
+        alert_expresion.innerHTML = expresion;
+    }
+
+    function validarNombre(){
+        var nombre = document.getElementById("nombre").value;
+        var alert_nombre = document.getElementById("nombre_status");
+        var array = nombre.split(" ");
+        alert_nombre.innerHTML = array.reverse();
+    }
+
+    function validarCadena(){
+        var cadena = document.getElementById("cadena").value;
+        var alert_cadena = document.getElementById("cadena_status");
+        alert_cadena.innerHTML = cadena.replace(/<\/?\w*>/," PELIGRO ");
+        
+    }
+
+</script>
+
+</html>

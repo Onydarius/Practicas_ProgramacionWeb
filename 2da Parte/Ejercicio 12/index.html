@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <p id = "resultado"></p>
+</body>
+<script>
+        var sumatoria = new Array(11).fill(0);
+        for(var i = 0; i<36000;i++){
+            dado1 = tirarDado();
+            dado2 = tirarDado();
+            let suma = dado1+ dado2;
+            sumatoria[suma-2]++;
+        }
+
+        imprimirResultados(sumatoria);
+
+
+
+        function tirarDado(){
+            let dado = Math.random() * (6 - 1) + 1;
+            return Math.round(dado);
+        }
+        function imprimirResultados(resultados){
+            let html = document.getElementById("resultado");
+            var contador = 2;
+
+            resultados.forEach(element => {
+                html.append(contador + " => " + element);
+                contador++;
+                html.append(document.createElement("br"));
+            });
+        }
+    </script>
+</html>

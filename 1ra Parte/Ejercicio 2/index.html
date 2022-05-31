@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <p id="fecha">
+
+    </p>
+</body>
+<script>
+    window.onload = getFecha();
+
+    function getFecha(){
+        let expresion = /\D{3}\s\d{2}\x2C\s\d{4}/;
+        var fecha = prompt("Introduzca el dato con el siguiente formato: MMM, DD, AAAA");
+        if (fecha.match(expresion)){
+            var difference = this.difference(fecha);
+            document.getElementById('fecha').innerHTML = "Han pasado " + difference + " dias desde " + fecha;
+
+        }else{
+            alert("introduce una fecha valida");
+            getFecha();
+        }
+    }
+    function difference(stringDate){
+        let today = new Date();
+        let date = new Date(stringDate);
+        var difference= Math.abs(today-date);
+        days = difference/(1000 * 3600 * 24)
+        return Math.floor(days);
+    }
+
+</script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<p id="text"></p>
+
+<body>
+
+</body>
+<script>
+    window.onload = getPalabra();
+    var parrafo;
+    var palabra;
+    var array;
+    function getPalabra() {
+        parrafo = document.getElementById("text");
+        palabra = prompt("Introduce una oración:");
+        array = palabra.split(" ");
+
+        parrafo.innerHTML = "Frase: " + palabra + "<br>";
+        parrafo.innerHTML += "Numero de palabras: " + array.length + "<br>";
+        parrafo.innerHTML += "Primera palabra: " + array[0] + "<br>";
+        parrafo.innerHTML += "Ultima palabra: " + array[array.length - 1] + "<br>";
+        this.imprimirArray(true);
+        this.imprimirArray(false);
+
+        const a = palabra.replace(/ /g,'').split("").reverse().join().toLocaleLowerCase();
+        const b = palabra.replace(/ /g,'').split("").join().toLocaleLowerCase();
+
+        if(JSON.stringify(a) === JSON.stringify(b)){
+            parrafo.innerHTML += "Es palindromo";
+        }else{
+            parrafo.innerHTML += "No es palindromo";
+        }
+    }
+    function imprimirArray(orden) {
+        if (orden) {
+            array.sort(function (a, b) {
+                return a.localeCompare(b);
+            });
+        }
+        if (!orden) {
+            array.sort(function (a, b) {
+                return b.localeCompare(a);
+            });
+        }
+        array.forEach(element => parrafo.innerHTML += element + " ");
+        parrafo.innerHTML +="<br>";
+    }
+</script>
+
+</html>

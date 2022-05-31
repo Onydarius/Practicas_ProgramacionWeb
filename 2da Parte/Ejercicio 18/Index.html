@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Ejercicio 18 - Información sobre eventos</title>
+
+    <style type="text/css">
+        body {font-family: arial, helvetica;}
+        .box {width:180px; height:160px; border:thin solid silver; padding:.5em; float: left; margin-right: 15px;}
+        .box h1 {margin: 0;}
+    </style>
+</head>
+
+<body>
+    <div id="raton-master" class="box"> 
+        <h1>Ratón</h1>
+        <div id="raton"></div>
+    </div>
+    <div id="teclado-master" class="box">
+        <h1>Teclado</h1>
+        <div id="teclado"></div>
+    </div>
+
+</body>
+<script>
+    document.addEventListener('mousemove', mostarInformacion);
+    document.addEventListener('keypress', mostarInformacionTeclado);
+    document.addEventListener('click', click);
+    let raton = document.getElementById("raton");
+    let teclado = document.getElementById("teclado")
+
+    function mostarInformacion(e){
+        var nav = "<br> Navegador[" + e.screenX +" , " + e.screenY+"]";
+        var pag = "Pagina[" + e.clientX + " , "+e.clientY+"]";
+        raton.innerHTML = nav + "<br><br>"+pag;
+        raton.parentNode.style.background =  "#FFFFFF";
+        teclado.parentNode.style.background = "#FFFFFF";
+    }
+
+    function mostarInformacionTeclado(e){
+        var car = "<br>Carácter [" +String.fromCharCode(e.charCode)+"]";
+        var cod = "Código ["+e.charCode+"]"
+        teclado.innerHTML = car + "<br><br>" + cod ;
+        teclado.parentNode.style.background =  "#CCE6FF";
+    }
+    function click(){
+        raton.parentNode.style.background =  "#FFFFCC";
+    }
+
+</script>
+</html>
